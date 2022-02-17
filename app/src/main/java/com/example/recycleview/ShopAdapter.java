@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
+    public ArrayList<DataShop> getDataShops() {
+        return dataShops;
+    }
+
     ArrayList<DataShop> dataShops;
     Context context;
 
@@ -27,12 +31,22 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.item_row,parent,false);
         return new ViewHolder(itemView);
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtName.setText(dataShops.get(position).getTen());
         holder.imgHinh.setImageResource(dataShops.get(position).getHinhAnh());
+    }
+
+    public void remove(@NonNull int position) {
+        this.dataShops.remove(position);
+    }
+
+    public void restoreItem(@NonNull DataShop item, int position) {
+        this.dataShops.add(position,item);
     }
 
     @Override
